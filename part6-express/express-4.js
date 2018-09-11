@@ -1,17 +1,18 @@
 // static file server for all resources in local directory public and below
-// AND handle forms submission to path /forms/... 
+// AND handle forms submission to path /forms/...
 var express = require('express'); //npm install express
 var bodyParser = require('body-parser'); // npm install body-parser
 var https = require("https");
+var util = require("util");
 
 var app = express()
 	.use(bodyParser.urlencoded({  extended: true}))
-	.get('/:name', function (request, response) { //process 
-		var name = request.params['name'];
-
+	.post('/forms/namestuff', function (request, response) { //process
+        var firstname = request.body['firstname'];
+        var lastname = request.body['lastname'];
 		https.get({
 			host: 'api.genderize.io',
-			path: '/?name[0]=' + name
+			path: '/?name=' + firstname
 		},  function (res) {
 
 			var chunks = [];
@@ -19,8 +20,10 @@ var app = express()
 				chunks.push(chunk);
 			});
 			res.on("end", function () {
-				var body = Buffer.concat(chunks);
-				response.end(body);
+                var body = Buffer.concat(chunks);
+                var genderInfo = JSON.parse(body);
+                var title = genderInfo.gender === 'female' ? 'Ms.' : 'Mr';
+				response.end(util.format('Thank you %s %s %s', title, firstname, lastname));
 			});
 		});
 	})

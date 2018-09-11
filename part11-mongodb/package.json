@@ -9,7 +9,6 @@
   "keywords": [
     "mongodb"
   ],
-  "author": "Lucas Jellema",
   "license": "ISC",
   "dependencies": {
     "co": "^4.6.0",

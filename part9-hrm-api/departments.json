@@ -1,0 +1,24 @@
+{
+    "departments": [
+        {
+            "name": "ACCOUNTING",
+            "id": 10,
+            "location": "NEW YORK"
+        },
+        {
+            "name": "RESEARCH",
+            "id": 20,
+            "location": "DALLAS"
+        },
+        {
+            "name": "SALES",
+            "id": 30,
+            "location": "CHICAGO"
+        },
+        {
+            "name": "OPERATIONS",
+            "id": 40,
+            "location": "BOSTON"
+        }
+    ]
+}

@@ -1,5 +1,5 @@
 /*
-example call:  http://127.0.0.1:5100/artists/get?artist=u2
+example call:  http://127.0.0.1:5100/artists?artist=u2
 
 */
 
@@ -29,7 +29,7 @@ var app = express()
     var artistName = req.params['artistname'];
     handleArtists(req, res, artistName);
   })
-  // register url path 
+  // register url path
   .get('/artists', function (req, res) {
     var artistName = req.query['artist'];	// to retrieve value of query parameter called artist (?artist=someValue&otherParam=X)
     handleArtists(req, res, artistName);
@@ -38,7 +38,7 @@ var app = express()
     console.log('request received: ' + request.url);
     res.writeHead(200, { 'Content-Type': 'text/html' });
     res.write("Artist Enricher API - No Data Requested, so none is returned");
-    res.write("Try something like http://127.0.0.1:5100/artists/get?artist=madonna");
+    res.write("Try something like http://127.0.0.1:5100/artists?artist=madonna");
     res.end();
   })
   .listen(PORT);
@@ -54,13 +54,13 @@ function composeArtisResponse(res, artist) {
 function handleArtists(req, res, artistName) {
   var artistUrl = spotifyAPI + '/search?q=' + encodeURI(artistName) + '&type=artist'; // use encodeURI to handle special characters in the name in the proper way
   route_options.uri = artistUrl;
-  // invoke Spotify Search API to find the Artist and the spotify identifier; the response brings in genres and an image url 
+  // invoke Spotify Search API to find the Artist and the spotify identifier; the response brings in genres and an image url
   request(route_options, function handleSpotifySearchResponse(error, response, body) {
     if (!error && response.statusCode == 200) {
       var artistsResponse = JSON.parse(body);
       var artist = {}; // artist record that will be constructed bit by bit
 
-      // if the artist has not been found, return immediately	  
+      // if the artist has not been found, return immediately
       if (artistsResponse.artists.total == 0) {
         res.status(200).send(JSON.stringify(artist));
         return;
@@ -75,8 +75,12 @@ function handleArtists(req, res, artistName) {
       }
       artist.spottiyHRef = artistsResponse.artists.items[0].href;
       composeArtisResponse(res, artist);
-    }// if !error in Spotify response
-  }); // request Spotify and callback 
+    }
+    else {
+      // if !error in Spotify response
+      console.log(error, response);
+    }
+  }); // request Spotify and callback
 } //handleArtists
 
 

@@ -1,0 +1,146 @@
+{
+	"variables": [],
+	"info": {
+		"name": "HRM_REST_API",
+		"_postman_id": "e354f85d-a7d8-8086-8d11-24cbfea6784c",
+		"description": "Collection to test the HrmRestApi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "HRM Rest API - Get All Departments",
+			"request": {
+				"url": "https://127.0.0.1:3000/hrm/departments",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "getDepartment Details DeptEmpAPI",
+			"request": {
+				"url": "https://127.0.0.1:3000/hrm/departments/10",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "get All Employees  DeptEmpAPI",
+			"request": {
+				"url": "https://127.0.0.1:3000/hrm/employees",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "getEmployee Details DeptEmpAPI",
+			"request": {
+				"url": "https://127.0.0.1:3000/hrm/employees/7902",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create John Doe as Employee",
+			"request": {
+				"url": "https://127.0.0.1:3000/hrm/employees",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\" : \"JOHNDOE\",\r\n  \"id\" : 1001,\r\n  \"job\" : \"TRAINER\",\r\n  \"hiredate\" : \"2017-09-18T00:00:00.000+00:00\",\r\n  \"salary\" : 3000,\r\n  \"commission\" : null,\r\n  \"departmentId\" : 40,\r\n  \"managerId\" : 7566\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Update Employee 7902 DeptEmpAPI",
+			"request": {
+				"url": "https://127.0.0.1:3000/hrm/employees",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"FORD\",\n    \"id\": 7902,\n    \"job\": \"TOP_ANAL\",\n    \"hiredate\": \"1981-12-03T00:00:00.000+00:00\",\n    \"salary\": 5000,\n    \"commission\": null,\n    \"departmentId\": null,\n    \"managerId\": 7566,\n    \"departmentName\": \"Research\",\n    \"departmentLocation\": \"Dallas\",\n    \"managerName\": \"JONES\",\n    \"managerJob\": \"MANAGER\",\n    \"staff\": {\n        \"id\": 7369,\n        \"name\": \"SMITH\",\n        \"job\": \"CLERK\"\n    }\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "delete Employee - HRM Rest API",
+			"request": {
+				"url": "https://127.0.0.1:3000/hrm/employees/1002",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

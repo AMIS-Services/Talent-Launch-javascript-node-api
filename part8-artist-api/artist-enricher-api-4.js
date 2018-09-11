@@ -1,5 +1,5 @@
 /*
-example call:  http://127.0.0.1:5100/artists/get?artist=u2
+example call:  http://127.0.0.1:5100/artists?artist=u2
 
 */
 
@@ -30,7 +30,7 @@ var app = express()
     var artistName = req.params['artistname'];
     handleArtists(req, res, artistName);
   })
-  // register url path 
+  // register url path
   .get('/artists', function (req, res) {
     var artistName = req.query['artist'];	// to retrieve value of query parameter called artist (?artist=someValue&otherParam=X)
     handleArtists(req, res, artistName);
@@ -39,7 +39,7 @@ var app = express()
     console.log('request received: ' + request.url);
     res.writeHead(200, { 'Content-Type': 'text/html' });
     res.write("Artist Enricher API - No Data Requested, so none is returned");
-    res.write("Try something like http://127.0.0.1:5100/artists/get?artist=madonna");
+    res.write("Try something like http://127.0.0.1:5100/artists?artist=madonna");
     res.end();
   })
   .listen(PORT);
@@ -69,7 +69,7 @@ function handleArtists(req, res, artistName) {
       var artistUrl = spotifyAPI + '/search?q=' + encodeURI(artistName) + '&type=artist'; // use encodeURI to handle special characters in the name in the proper way
       route_options.uri = artistUrl;
       console.log('1. Call to Spotify to find artist : ' + artistUrl);
-      // 1. invoke Spotify Search API to find the Artist and the spotify identifier; the response brings in genres and an image url 
+      // 1. invoke Spotify Search API to find the Artist and the spotify identifier; the response brings in genres and an image url
       request(route_options, function handleSpotifySearchResponse(error, response, body) {
         if (error) {
           console.log("error in processing " + JSON.stringify(error));
@@ -79,7 +79,7 @@ function handleArtists(req, res, artistName) {
         if (!error && response.statusCode == 200) {
           var artistsResponse = JSON.parse(body);
 
-          // if the artist has not been found, return immediately	  
+          // if the artist has not been found, return immediately
           if (artistsResponse.artists.total == 0) {
             callback(null, 'not found');
           }// if artist not found
@@ -116,7 +116,7 @@ function handleArtists(req, res, artistName) {
           artist.albums.push(album);
         };// for loop over albums
         callback(null, artist.albums);
-      });//request     
+      });//request
     }, // go get details on the albums in the list artist.albums
     function (albums, callback) {
       var albumsDetailsURL = spotifyAPI + '/albums/?ids=';
@@ -156,7 +156,7 @@ function handleArtists(req, res, artistName) {
         console.log("Done foreach!");
         callback(err, albums);
       }
-      );// forEachOf						  
+      );// forEachOf
     }
   ]
     // all functions in the waterfall are complete, now we can proceed
