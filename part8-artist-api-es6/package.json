@@ -1,0 +1,43 @@
+{
+  "name": "artist-enricher-api-es6",
+  "version": "0.0.1",
+  "description": "A REST API (GET requests) to retrieve rich information about a muscial artist: e.g. http://host:port/artists?artist=the+beatles",
+  "main": "dist",
+  "scripts": {
+    "dev": "nodemon -w src --exec \"babel-node src --presets es2015,stage-0\"",
+    "build": "babel src -s -D -d dist --presets es2015,stage-0",
+    "start": "node dist",
+    "prestart": "npm run -s build",
+    "test": "eslint src"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "async": ">=1.5.2",
+    "express": "^4.13.4",
+    "promise": "^8.0.1",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.9.0",
+    "babel-core": "^6.9.0",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-stage-0": "^6.5.0",
+    "eslint": "^3.1.1",
+    "nodemon": "^1.9.2"
+  },
+  "eslintConfig": {
+    "extends": "eslint:recommended",
+    "parserOptions": {
+      "ecmaVersion": 7,
+      "sourceType": "module"
+    },
+    "env": {
+      "node": true
+    },
+    "rules": {
+      "no-console": 0,
+      "no-unused-vars": 1
+    }
+  }
+}

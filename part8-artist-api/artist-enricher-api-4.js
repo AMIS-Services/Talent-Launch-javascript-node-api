@@ -53,7 +53,7 @@ function composeArtisResponse(res, artist) {
 }//composeArtisResponse
 
 function composeErrorResponse(res, err) {
-  logger.log("Error in composing artist response: " + JSON.stringify(err), moduleName, logger.ERROR);
+  console.log("Error in composing artist response: " + JSON.stringify(err));
   res.statusCode = 500;
   res.send('An internal error occurred: ' + JSON.stringify(err));
 }//composeErrorResponse
@@ -72,8 +72,7 @@ function handleArtists(req, res, artistName) {
       // 1. invoke Spotify Search API to find the Artist and the spotify identifier; the response brings in genres and an image url
       request(route_options, function handleSpotifySearchResponse(error, response, body) {
         if (error) {
-          console.log("error in processing " + JSON.stringify(error));
-          logger.log("Error in processing artist enrichment: " + JSON.stringify(err), moduleName, logger.ERROR);
+          console.log("error in processing artist enrichment " + JSON.stringify(error));
           callback(error, artist.spotifyId);
         }
         if (!error && response.statusCode == 200) {
@@ -116,7 +115,8 @@ function handleArtists(req, res, artistName) {
           artist.albums.push(album);
         };// for loop over albums
         callback(null, artist.albums);
-      });//request
+      })
+      //request
     }, // go get details on the albums in the list artist.albums
     function (albums, callback) {
       var albumsDetailsURL = spotifyAPI + '/albums/?ids=';
@@ -163,8 +163,7 @@ function handleArtists(req, res, artistName) {
     , function (err, results) {
       console.log("Done waterfall!");
       if (err) {
-        logger.log("Error in processing artist enrichment: " + JSON.stringify(err), moduleName, logger.ERROR);
-        console.log("error in processing " + JSON.stringify(err));
+        console.log("error in processing artist enrichment:  " + JSON.stringify(err));
         composeErrorResponse(res, err);
       }
       else {

@@ -5,7 +5,7 @@
   "repository": "https://github.com/lucasjellema/aced-cloud-demo-ofmw2016-valencia",
   "main": "artist-enricher-api.js",
   "scripts": {
-    "start": "sudo nodejs artist-enricher-api.js",
+    "start": "node artist-enricher-api.js",
     "monitor": "nodemon artist-enricher-api.js"
   },
   "license": "Apache Version 2.0",
